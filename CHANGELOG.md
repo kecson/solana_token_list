@@ -1,3 +1,7 @@
+## 0.0.3+1
+
+- Fix add example
+
 ## 0.0.3
 
 - Add Lints
