@@ -1,24 +1,18 @@
-/// description : "token"
-/// name : "tag"
+import 'package:json_annotation/json_annotation.dart';
 
+part 'tag_details.g.dart';
+
+@JsonSerializable(anyMap: true)
 class TagDetails {
+  String? description;
+  String? name;
+
   TagDetails({
-    required this.description,
-    required this.name,
+    this.description,
+    this.name,
   });
 
-  TagDetails.fromJson(Map<String, dynamic> json) {
-    description = json['description'] ?? '';
-    name = json['name'] ?? '';
-  }
+  factory TagDetails.fromJson(Map json) => _$TagDetailsFromJson(json);
 
-  late String description;
-  late String name;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['description'] = description;
-    map['name'] = name;
-    return map;
-  }
+  Map<String, dynamic> toJson() => _$TagDetailsToJson(this);
 }

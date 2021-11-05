@@ -1,3 +1,8 @@
+## 0.0.3
+
+- Add Lints
+- Documentation fixes.
+
 ## 0.0.2
 
 - Update readme

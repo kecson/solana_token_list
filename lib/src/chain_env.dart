@@ -22,7 +22,7 @@ extension EnvExt on ChainEnv {
   }
 }
 
-const CLUSTER_SLUGS = <String, ChainEnv>{
+const clusterSlugs = <String, ChainEnv>{
   'mainnet-beta': ChainEnv.mainNet,
   'testnet': ChainEnv.testNet,
   'devnet': ChainEnv.devNet,

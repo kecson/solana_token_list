@@ -115,28 +115,24 @@ class TokenInfo {
 }
 
 extension TokenInfoExt on List<TokenInfo> {
-  Iterable<TokenInfo> filterByTag(String tag) {
-    return where((t) => (t.tags ?? []).contains(tag));
-  }
+  Iterable<TokenInfo> filterByTag(String tag) =>
+      where((t) => (t.tags ?? []).contains(tag));
 
-  Iterable<TokenInfo> excludeByTag(String tag) {
-    return where((t) => !(t.tags ?? []).contains(tag));
-  }
+  Iterable<TokenInfo> excludeByTag(String tag) =>
+      where((t) => !(t.tags ?? []).contains(tag));
 
-  Iterable<TokenInfo> filterByChainEnv(ChainEnv env) {
-    return where((t) => t.chainId == env.chainId);
-  }
+  Iterable<TokenInfo> filterByChainEnv(ChainEnv env) =>
+      where((t) => t.chainId == env.chainId);
 
-  Iterable<TokenInfo> excludeByChainEnv(ChainEnv env) {
-    return where((t) => t.chainId != env.chainId);
-  }
+  Iterable<TokenInfo> excludeByChainEnv(ChainEnv env) =>
+      where((t) => t.chainId != env.chainId);
 
   Iterable<TokenInfo> filterByClusterSlug(String slug) {
-    if (CLUSTER_SLUGS.containsKey(slug)) {
-      return filterByChainEnv(CLUSTER_SLUGS[slug]!);
+    if (clusterSlugs.containsKey(slug)) {
+      return filterByChainEnv(clusterSlugs[slug]!);
     } else {
-      print('Unknown slug: ${slug}, please use one of ${CLUSTER_SLUGS.keys}');
-      return Iterable<TokenInfo>.empty();
+      print('Unknown slug: $slug, please use one of ${clusterSlugs.keys}');
+      return const Iterable<TokenInfo>.empty();
     }
   }
 }

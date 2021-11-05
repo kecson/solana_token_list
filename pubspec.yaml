@@ -1,6 +1,6 @@
 name: solana_token_list
-description: Solana Token Registry is a package that allows application to query for list of tokens. The JSON schema for the tokens includes chainId, address, name, decimals, symbol, logoURI (optional), tags (optional), and custom extensions metadata.
-version: 0.0.2
+version: 0.0.3
+description: Solana Token Registry is a package that allows application to query for list of tokens.
 homepage: https://github.com/kecson/solana_token_list
 
 environment:
@@ -8,8 +8,9 @@ environment:
 
 
 dev_dependencies:
-  test: ^1.16.0
   build_runner: ^2.1.2
+  lints: ^1.0.1
+  test: ^1.16.0
 
 dependencies:
   http: ^0.13.3

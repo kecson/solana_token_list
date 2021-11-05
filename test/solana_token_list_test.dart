@@ -8,13 +8,13 @@ void main() {
     });
 
     test('Static Solana Tokens', () {
-      var tokens = solanaTokenList.tokens;
-      print('solanaTokenList size: ${tokens.length}');
+      var tokens = staticTokenList.tokens;
+      print('staticTokenList size: ${tokens.length}');
     });
 
     test('CDN Solana Tokens', () async {
       var tokens =
-          await TokenListStrategy().fetchTokenList(strategy: Strategy.CDN);
+          await TokenListStrategy().fetchTokenList(strategy: Strategy.cdn);
       print('CDN solanaTokenList size: ${tokens.length}');
     });
   });

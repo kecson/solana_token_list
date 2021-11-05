@@ -3,14 +3,14 @@ import 'resolution_strategy.dart';
 
 class TokenListStrategy {
   static const strategies = {
-    Strategy.GitHub: GitHubTokenListResolutionStrategy(),
-    Strategy.Static: StaticTokenListResolutionStrategy(),
-    Strategy.Solana: SolanaTokenListResolutionStrategy(),
-    Strategy.CDN: CDNTokenListResolutionStrategy(),
+    Strategy.github: GitHubTokenListResolutionStrategy(),
+    Strategy.static: StaticTokenListResolutionStrategy(),
+    Strategy.solana: SolanaTokenListResolutionStrategy(),
+    Strategy.cdn: CDNTokenListResolutionStrategy(),
   };
 
   Future<List<TokenInfo>> fetchTokenList({
-    Strategy strategy = Strategy.CDN,
+    Strategy strategy = Strategy.cdn,
   }) async {
     var resolutionStrategy = TokenListStrategy.strategies[strategy] ??
         const StaticTokenListResolutionStrategy();

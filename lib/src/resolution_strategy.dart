@@ -6,26 +6,26 @@ import '../solana_token_list.dart';
 import 'solana_tokens.dart';
 
 enum Strategy {
-  GitHub,
-  Static,
-  Solana,
-  CDN,
+  github,
+  static,
+  solana,
+  cdn,
 }
 
 extension StrategyExt on Strategy {
   String get name {
     String _name;
     switch (this) {
-      case Strategy.GitHub:
+      case Strategy.github:
         _name = 'GitHub';
         break;
-      case Strategy.Static:
+      case Strategy.static:
         _name = 'Static';
         break;
-      case Strategy.Solana:
+      case Strategy.solana:
         _name = 'Solana';
         break;
-      case Strategy.CDN:
+      case Strategy.cdn:
         _name = 'CDN';
         break;
     }
@@ -43,11 +43,11 @@ abstract class ResolutionStrategy {
       repositories.map((url) async {
         try {
           final resp = await http.get(Uri.parse(url));
-          final tokenList = TokenList.fromJson(json.decode(resp.body));
+          final tokenList = TokenList.fromJson(json.decode(resp.body) as Map);
           return tokenList;
         } catch (e) {
           print(e);
-          return solanaTokenList;
+          return staticTokenList;
         }
       }),
     );
@@ -63,9 +63,8 @@ class StaticTokenListResolutionStrategy extends ResolutionStrategy {
   const StaticTokenListResolutionStrategy() : super(const <String>[]);
 
   @override
-  Future<List<TokenInfo>> fetchTokenList() {
-    return Future.value(solanaTokenList.tokens);
-  }
+  Future<List<TokenInfo>> fetchTokenList() =>
+      Future.value(staticTokenList.tokens);
 }
 
 class CDNTokenListResolutionStrategy extends ResolutionStrategy {
