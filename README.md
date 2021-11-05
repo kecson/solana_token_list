@@ -2,15 +2,44 @@ Solana Token Registry is a package that allows application to query for list of 
 
 [![pub package](https://img.shields.io/pub/v/solana_token_list.svg)](https://pub.dev/packages/solana_token_list)
 
-## Usage
+## Using
 
-A simple usage example:
-
+Token list is filterable by a tag
 ```dart
 import 'package:solana_token_list/solana_token_list.dart';
 
-main() async {
-   var tokens = await TokenListStrategy().fetchTokenList(strategy: Strategy.CDN);
-}
+void main() async {
+    final list = (await TokenListStrategy().fetchTokenList(Strategy.static))
+        .filterByChainEnv(ChainEnv.mainNetBeta)
+        .filterByTag('nft');}
+```
+
+
+Token list can exclude by a tag
+```dart
+   final list = (await TokenListStrategy().fetchTokenList(Strategy.static))
+     .filterByChainEnv(ChainEnv.mainNetBeta)
+     .excludeByTag('nft');
+```
+
+
+Token list can exclude by a chain
+```dart
+    final list = (await TokenListStrategy().fetchTokenList(Strategy.static))
+        .excludeByChainEnv(ChainEnv.mainNetBeta);
+```
+
+
+Token list returns  object upon filter
+```dart
+    final list = await TokenListStrategy().fetchTokenList(Strategy.static);
+    final filtered = list.filterByChainEnv(ChainEnv.mainNetBeta);
+```
+
+
+Token list is empty  when calling filterByClusterSlug with slug that does not exist
+```dart
+    final list = await TokenListStrategy().fetchTokenList(Strategy.static);
+    final filtered = list.filterByClusterSlug('whoop');
 ```
 

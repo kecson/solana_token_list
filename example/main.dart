@@ -5,7 +5,21 @@ void main() async {
   var staticTokens = staticTokenList.tokens;
   print('staticTokens size: ${staticTokens.length}');
 
-  // fetch CDN Tokens
-  var cdnTokens = await TokenListStrategy().fetchTokenList(strategy: Strategy.cdn);
+  var tokenListStrategy = TokenListStrategy();
+
+  // Fetch CDN Tokens
+  final cdnTokens = await tokenListStrategy.fetchTokenList(Strategy.cdn);
   print('CDN solanaTokenList size: ${cdnTokens.length}');
+
+  //Token list can exclude by a tag
+  final noNftTokenList =
+      (await tokenListStrategy.fetchTokenList(Strategy.static))
+          .filterByChainEnv(ChainEnv.mainNetBeta)
+          .excludeByTag('nft');
+
+  //Filter by cluster name
+  final list = cdnTokens.filterByClusterSlug('Mainnet-Beta');
+
+  //Filter MainNet Beta tokens
+  final mainNetList = cdnTokens.filterByChainEnv(ChainEnv.mainNetBeta);
 }

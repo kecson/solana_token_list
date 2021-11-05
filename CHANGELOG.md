@@ -1,3 +1,9 @@
+## 0.0.3+2
+
+- Add API doc
+- Add Using example
+- Modify LICENSE
+
 ## 0.0.3+1
 
 - Fix add example

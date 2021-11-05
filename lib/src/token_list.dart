@@ -75,13 +75,14 @@ class TokenList {
   Map<String, dynamic> toJson() => _$TokenListToJson(this);
 }
 
+/// token's info. chainId is one of [ChainEnv]. [address] is token's mint.
 @JsonSerializable(anyMap: true)
 class TokenInfo {
   int chainId;
 
   ChainEnv get chainEnv {
     final env = ChainEnv.values.firstWhere((c) => c.chainId == chainId,
-        orElse: () => ChainEnv.mainNet);
+        orElse: () => ChainEnv.mainNetBeta);
     return env;
   }
 
@@ -93,9 +94,9 @@ class TokenInfo {
   int decimals;
   String symbol;
   String? logoURI;
-  List<String>? tags;
+  @JsonKey(defaultValue: <String>[])
+  List<String> tags;
 
-  @JsonKey()
   TokenExtensions? extensions;
 
   TokenInfo({
@@ -105,7 +106,7 @@ class TokenInfo {
     required this.decimals,
     required this.symbol,
     this.logoURI,
-    this.tags,
+    this.tags = const <String>[],
     this.extensions,
   });
 
@@ -114,24 +115,36 @@ class TokenInfo {
   Map<String, dynamic> toJson() => _$TokenInfoToJson(this);
 }
 
-extension TokenInfoExt on List<TokenInfo> {
+extension TokenInfoExt on Iterable<TokenInfo> {
+  /// filter by token's [tag].
   Iterable<TokenInfo> filterByTag(String tag) =>
-      where((t) => (t.tags ?? []).contains(tag));
+      where((t) => t.tags.contains(tag));
 
+  /// include filter token exclude [tag].
   Iterable<TokenInfo> excludeByTag(String tag) =>
-      where((t) => !(t.tags ?? []).contains(tag));
+      where((t) => !t.tags.contains(tag));
 
+  /// include filter token by [env]
   Iterable<TokenInfo> filterByChainEnv(ChainEnv env) =>
       where((t) => t.chainId == env.chainId);
 
+  ///exclude filter token by [env]
   Iterable<TokenInfo> excludeByChainEnv(ChainEnv env) =>
       where((t) => t.chainId != env.chainId);
 
+  /// filter token by cluster' name.
+  ///
+  /// * [slug] cluster' name
   Iterable<TokenInfo> filterByClusterSlug(String slug) {
-    if (clusterSlugs.containsKey(slug)) {
-      return filterByChainEnv(clusterSlugs[slug]!);
+    final clusterSlugs = ChainEnv.values.toList(growable: false);
+    var where = clusterSlugs
+        .where((c) => c.clusterName.toLowerCase() == slug.toLowerCase());
+    if (where.isNotEmpty) {
+      return filterByChainEnv(where.first);
     } else {
-      print('Unknown slug: $slug, please use one of ${clusterSlugs.keys}');
+      final clusterNames =
+          clusterSlugs.map((e) => e.clusterName).toList(growable: false);
+      print('Unknown slug: $slug, please use one of $clusterNames');
       return const Iterable<TokenInfo>.empty();
     }
   }

@@ -1,5 +1,6 @@
+/// solana cluster env
 enum ChainEnv {
-  mainNet,
+  mainNetBeta,
   testNet,
   devNet,
 }
@@ -8,7 +9,7 @@ extension EnvExt on ChainEnv {
   int get chainId {
     int id;
     switch (this) {
-      case ChainEnv.mainNet:
+      case ChainEnv.mainNetBeta:
         id = 101;
         break;
       case ChainEnv.testNet:
@@ -20,10 +21,20 @@ extension EnvExt on ChainEnv {
     }
     return id;
   }
-}
 
-const clusterSlugs = <String, ChainEnv>{
-  'mainnet-beta': ChainEnv.mainNet,
-  'testnet': ChainEnv.testNet,
-  'devnet': ChainEnv.devNet,
-};
+  String get clusterName {
+    String name;
+    switch (this) {
+      case ChainEnv.mainNetBeta:
+        name = 'Mainnet-Beta';
+        break;
+      case ChainEnv.testNet:
+        name = 'Testnet';
+        break;
+      case ChainEnv.devNet:
+        name = 'DevNet';
+        break;
+    }
+    return name;
+  }
+}

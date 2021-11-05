@@ -70,7 +70,9 @@ TokenInfo _$TokenInfoFromJson(Map json) => TokenInfo(
       decimals: json['decimals'] as int,
       symbol: json['symbol'] as String,
       logoURI: json['logoURI'] as String?,
-      tags: (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      tags:
+          (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              [],
       extensions: json['extensions'] == null
           ? null
           : TokenExtensions.fromJson(json['extensions'] as Map),

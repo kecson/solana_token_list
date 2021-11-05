@@ -2,6 +2,7 @@ import '../solana_token_list.dart' show TokenList;
 
 TokenList? _staticTokenList;
 
+/// solana static token list
 TokenList get staticTokenList {
   _staticTokenList ??= TokenList.fromJson(_kSolanaTokens);
   return _staticTokenList!;
