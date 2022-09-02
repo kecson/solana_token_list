@@ -1,3 +1,7 @@
+## 0.0.3+3
+
+- Update LICENSE
+
 ## 0.0.3+2
 
 - Add API doc

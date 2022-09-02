@@ -12,14 +12,16 @@ void main() async {
   print('CDN solanaTokenList size: ${cdnTokens.length}');
 
   //Token list can exclude by a tag
-  final noNftTokenList =
-      (await tokenListStrategy.fetchTokenList(Strategy.static))
-          .filterByChainEnv(ChainEnv.mainNetBeta)
-          .excludeByTag('nft');
+  final noNftTokenList = (await tokenListStrategy.fetchTokenList(Strategy.static))
+      .filterByChainEnv(ChainEnv.mainNetBeta)
+      .excludeByTag('nft');
+  print('mainNetBeta noNftTokenList size: ${noNftTokenList.length}');
 
   //Filter by cluster name
   final list = cdnTokens.filterByClusterSlug('Mainnet-Beta');
+  print('Mainnet-Beta size: ${list.length}');
 
   //Filter MainNet Beta tokens
   final mainNetList = cdnTokens.filterByChainEnv(ChainEnv.mainNetBeta);
+  print('mainNetList size: ${mainNetList.length}');
 }

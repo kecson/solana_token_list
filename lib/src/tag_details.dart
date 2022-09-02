@@ -4,13 +4,17 @@ part 'tag_details.g.dart';
 
 @JsonSerializable(anyMap: true)
 class TagDetails {
-  String? description;
-  String? name;
-
   TagDetails({
-    this.description,
-    this.name,
+    this.description = '',
+    this.name = '',
   });
+
+  @JsonKey(defaultValue: '')
+  String description;
+
+  @JsonKey(defaultValue: '')
+  String name;
+
 
   factory TagDetails.fromJson(Map json) => _$TagDetailsFromJson(json);
 

@@ -1,4 +1,4 @@
-Solana Token Registry is a package that allows application to query for list of tokens. The JSON schema for the tokens includes: chainId, address, name, decimals, symbol, logoURI (optional), tags (optional), and custom extensions metadata.
+[Solana Token Registry](https://github.com/solana-labs/token-list) is a package that allows application to query for list of tokens. The JSON schema for the tokens includes: chainId, address, name, decimals, symbol, logoURI (optional), tags (optional), and custom extensions metadata.
 
 [![pub package](https://img.shields.io/pub/v/solana_token_list.svg)](https://pub.dev/packages/solana_token_list)
 
