@@ -1,0 +1,6 @@
+# Allow file for git-secrets, see:
+# https://github.com/awslabs/git-secrets#ignoring-false-positives
+
+# Ignore secrets from leak detection, these secrets have all been revoked and
+# are only used for testing the detection logic.
+/lib/src/static_tokens.dart

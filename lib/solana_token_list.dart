@@ -1,5 +1,3 @@
-library solana_token_list;
-
 export 'src/chain_env.dart';
 export 'src/resolution_strategy.dart';
 export 'src/static_tokens.dart';

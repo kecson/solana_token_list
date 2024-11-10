@@ -15,7 +15,6 @@ class TagDetails {
   @JsonKey(defaultValue: '')
   String name;
 
-
   factory TagDetails.fromJson(Map json) => _$TagDetailsFromJson(json);
 
   Map<String, dynamic> toJson() => _$TagDetailsToJson(this);

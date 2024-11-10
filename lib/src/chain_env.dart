@@ -6,35 +6,15 @@ enum ChainEnv {
 }
 
 extension EnvExt on ChainEnv {
-  int get chainId {
-    int id;
-    switch (this) {
-      case ChainEnv.mainNetBeta:
-        id = 101;
-        break;
-      case ChainEnv.testNet:
-        id = 102;
-        break;
-      case ChainEnv.devNet:
-        id = 103;
-        break;
-    }
-    return id;
-  }
+  int get chainId => switch (this) {
+        ChainEnv.mainNetBeta => 101,
+        ChainEnv.testNet => 102,
+        ChainEnv.devNet => 103,
+      };
 
-  String get clusterName {
-    String name;
-    switch (this) {
-      case ChainEnv.mainNetBeta:
-        name = 'Mainnet-Beta';
-        break;
-      case ChainEnv.testNet:
-        name = 'Testnet';
-        break;
-      case ChainEnv.devNet:
-        name = 'DevNet';
-        break;
-    }
-    return name;
-  }
+  String get clusterName => switch (this) {
+        ChainEnv.mainNetBeta => 'Mainnet-Beta',
+        ChainEnv.testNet => 'Testnet',
+        ChainEnv.devNet => 'DevNet',
+      };
 }

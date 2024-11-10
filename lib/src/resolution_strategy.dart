@@ -1,9 +1,9 @@
 import 'dart:convert';
+import 'dart:core';
 
 import 'package:http/http.dart' as http;
 
 import '../solana_token_list.dart';
-import 'static_tokens.dart';
 
 enum Strategy {
   github,
@@ -13,24 +13,12 @@ enum Strategy {
 }
 
 extension StrategyExt on Strategy {
-  String get name {
-    String _name;
-    switch (this) {
-      case Strategy.github:
-        _name = 'GitHub';
-        break;
-      case Strategy.static:
-        _name = 'Static';
-        break;
-      // case Strategy.solana:
-      //   _name = 'Solana';
-      // break;
-      case Strategy.cdn:
-        _name = 'CDN';
-        break;
-    }
-    return _name;
-  }
+  String get name => switch (this) {
+        Strategy.github => 'GitHub',
+        Strategy.static => 'Static',
+        // Strategy.solana => 'Solana',
+        Strategy.cdn => 'CDN',
+      };
 }
 
 /// Resolution for fetch token list
@@ -80,8 +68,8 @@ class CDNTokenListResolutionStrategy extends ResolutionStrategy {
 // class SolanaTokenListResolutionStrategy extends ResolutionStrategy {
 //   const SolanaTokenListResolutionStrategy()
 //       : super(const <String>[
-//           // Not Implemented Yet.;
-//         ]);
+//     'https://token-list.solana.com/solana.tokenlist.json'
+//   ]);
 // }
 
 class GitHubTokenListResolutionStrategy extends ResolutionStrategy {
