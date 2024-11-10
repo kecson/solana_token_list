@@ -37,11 +37,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Get version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
+        uses: actions/create-release@latest
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
+          tag_name: ${{ steps.get_version.outputs.VERSION }}
           release_name: Release ${{ github.ref }}
           body: Please refer to [CHANGELOG.md](https://github.com/kecson/solana_token_list/blob/master/CHANGELOG.md) for details.
           draft: false
